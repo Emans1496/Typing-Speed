@@ -2,6 +2,8 @@
 
 ![Typing Speed Test - Active Game](./design/desktop-started.jpg)
 
+LIVE DEMO: https://challenge-typing-speed.netlify.app/
+
 This is a solution to the [Typing Speed Test challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/typing-speed-test). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
