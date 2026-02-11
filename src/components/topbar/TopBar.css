@@ -1,0 +1,46 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: medium;
+}
+
+.topbar-logo--small {
+  display: none;
+}
+
+.personal-best {
+  color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.personal-best-label--short {
+  display: none;
+}
+
+.pb-score {
+  font-weight: bold;
+  color: var(--neutral-0);
+}
+
+@media (max-width: 600px) {
+  .topbar-logo--large {
+    display: none;
+  }
+
+  .topbar-logo--small {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
+
+  .personal-best-label {
+    display: none;
+  }
+
+  .personal-best-label--short {
+    display: inline;
+  }
+}

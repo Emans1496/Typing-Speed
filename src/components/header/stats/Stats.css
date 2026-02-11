@@ -1,0 +1,48 @@
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  color: var(--neutral-500);
+  font-size: 0.875rem;
+}
+
+.stat-value {
+  color: var(--neutral-0);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.stat-value--red {
+  color: var(--red-500);
+}
+
+.stat-divider {
+  color: var(--neutral-500);
+  font-size: 1.25rem;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stat-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+}
