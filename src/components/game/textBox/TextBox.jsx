@@ -17,6 +17,7 @@ export default function TextBox({
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const textBoxRef = useRef(null);
+  const inputRef = useRef(null);
   const mistakeRef = useRef(0);
   const gameEndedRef = useRef(false);
 
@@ -49,12 +50,8 @@ export default function TextBox({
     [handleGameEnd, gameStartTimeRef]
   );
 
-  const handleKeyDown = (e) => {
-    if (!gameStart) return;
-    e.preventDefault();
-    const key = e.key;
-    if (key.length > 1 && key !== "Backspace") return;
-    if (currentIndex >= chars.length) return;
+  const processKey = (key) => {
+    if (!gameStart || currentIndex >= chars.length) return;
 
     const isCorrect = key === chars[currentIndex].char;
     if (!isCorrect) {
@@ -80,6 +77,24 @@ export default function TextBox({
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (!gameStart) return;
+    e.preventDefault();
+    const key = e.key;
+    if (key.length > 1 && key !== "Backspace") return;
+    processKey(key);
+  };
+
+  const handleInput = (e) => {
+    if (!gameStart) return;
+    const value = e.target.value;
+    if (value.length > 0) {
+      const key = value[value.length - 1];
+      processKey(key);
+    }
+    e.target.value = "";
+  };
+
   // Handle timed mode: timer hits 0
   useEffect(() => {
     if (gameStart && mode === "timed" && startTime === 0) {
@@ -89,18 +104,34 @@ export default function TextBox({
 
   // Auto-focus when game starts
   useEffect(() => {
-    if (gameStart && textBoxRef.current) {
-      textBoxRef.current.focus();
+    if (gameStart && inputRef.current) {
+      inputRef.current.focus();
     }
   }, [gameStart]);
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   return (
     <div
       ref={textBoxRef}
       className={`text-box ${className || ""}`}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
+      onClick={focusInput}
     >
+      <input
+        ref={inputRef}
+        className="text-box-hidden-input"
+        type="text"
+        autoCapitalize="none"
+        autoCorrect="off"
+        autoComplete="off"
+        spellCheck={false}
+        onKeyDown={handleKeyDown}
+        onInput={handleInput}
+      />
       {chars && chars.length > 0 ? (
         <div className="chars-container">
           {chars.map((charObj, index) => (
